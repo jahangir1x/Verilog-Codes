@@ -8,6 +8,7 @@ module excess_3_to_bcd(b, e);
     wire and_e1_xnor_e0_e2;
     wire and_e2_e3;
     wire and_e0_e1_e3;
+    wire and_e0_e1;
 
     not(b[0], e[0]);
     xor(b[1], e[0], e[1]);
@@ -17,7 +18,10 @@ module excess_3_to_bcd(b, e);
     xnor(xnor_e0_e2, e[0], e[2]);
 
     and(and_e1_xnor_e0_e2, e[1], xnor_e0_e2);
-    or(b[2], and_e1_xnor_e0_e2, nor_e1_e2);
+
+    and(and_e0_e1, e[0], e[1]);
+
+    xnor(b[2], e[2], and_e0_e1);
 
     and(and_e2_e3, e[2], e[3]);
 
